@@ -1,0 +1,11 @@
+FROM golang:alpine AS builder 
+
+RUN apk add --no-cache go 
+WORKDIR /app
+COPY . .
+RUN go build -o backend 
+FROM alpine
+WORKDIR /APP
+COPY --from=builder /app/backend /app/backend
+COPY .env .
+CMD ["./backend"]

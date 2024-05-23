@@ -1,0 +1,29 @@
+version: '3.8'
+
+services: 
+  backend: 
+    build: ./BACK
+    ports: 
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=jasvan
+      - DB_PORT=5432
+      - DB_USER=jasvan
+      - DB_PASSWORD=jasvan
+      - DB_NAME=jasvan
+
+  database:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=jasvan
+      - POSTGRES_PASSWORD=jasvan
+      - POSTGRES_DB=jasvan
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
